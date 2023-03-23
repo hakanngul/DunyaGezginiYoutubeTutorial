@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  DunyaGezgini
@@ -9,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var fahrenheitValue: String = ""
+    @State var isVisible = false
     let numberFormatter : NumberFormatter = {
       let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -49,6 +51,13 @@ struct ContentView: View {
         }
         .foregroundColor(.orange)
         .font(.title)
+        .opacity(isVisible ? 1.0 : 0.0)
+        .offset(x:0, y: isVisible ? 0 : 20)
+        .animation(.easeIn(duration: 2.0), value: isVisible)
+        .onAppear {
+            // ekranda ilk gözüktüğü anı belirtiyor onApper
+            self.isVisible = true
+        }
         
     }
 }
